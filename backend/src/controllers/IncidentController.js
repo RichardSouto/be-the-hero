@@ -44,13 +44,6 @@ module.exports = {
             .where('id', id)
             .select('ong_id')
             .first();
-
-        console.log(typeof(id));
-        console.log(id);
-        console.log(typeof(ong_id));
-        console.log(ong_id);
-        console.log(typeof(incident.ong_id));
-        console.log(incident.ong_id);
         
         if(incident.ong_id !== ong_id){
             return response.status(401).json({error: 'Operation not permitted.'});
