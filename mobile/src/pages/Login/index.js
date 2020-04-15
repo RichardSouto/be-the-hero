@@ -57,7 +57,6 @@ export default function Login() {
         }
     }
 
-
     return(
         <View style={styles.container}>
             <View style={styles.loginGroup}>
@@ -78,7 +77,7 @@ export default function Login() {
                 <View style={styles.semCadastroGroup}>
                     <TouchableOpacity 
                         style={styles.semCadastroTouchable}
-                        onPress={() => {}}
+                        onPress={() => {navigation.navigate('CadastrarOng')}}
                     >
                         {/* <Feather name="log-in" size={15} /> */}
                         <Text style={styles.semCadastroText}>Cadastrar-se</Text>
