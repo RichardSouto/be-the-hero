@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Image, Text, TouchableOpacity } from 'react-native';
+import { View, FlatList, Image, Text, TouchableOpacity, Button, AsyncStorage, Alert } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -45,6 +45,25 @@ export default function Incidents(){
         navigation.navigate('Detail', { incident });    
     }
 
+    async function handleNovoIncidente() {
+        const ongId = await AsyncStorage.getItem('ongId');
+
+        if (ongId == undefined || ongId.trim() == '') {
+            Alert.alert(
+                'Be The Heroe',
+                'Nenhuma ong logada no momento.\r\n\r\nDeseja realizar o login para cadastrar um novo incidente?',
+                [
+                    {text: 'Sim', onPress: () => navigation.navigate('Login')},
+                    {text: 'Não', onPress: () => { return }}
+                ],
+                {onDismiss: () => { return } }
+            )
+            return;
+        }
+
+        navigation.navigate('CadastrarIncidente');
+    }
+
     return(
         <View style={styles.container}>
             <View style={styles.header}>
@@ -56,6 +75,11 @@ export default function Incidents(){
 
             <Text style={styles.title}>Bem-vindo!</Text>
             <Text style={styles.description}>Escolha um dos casos abaixo e salve o dia</Text>
+
+            <Button 
+                color="#e02041"
+                title="Novo Incident" 
+                onPress={handleNovoIncidente}/>
 
             <FlatList 
                 style={styles.incidentList}
