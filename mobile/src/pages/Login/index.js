@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Button, TouchableOpacity, AsyncStorage, Alert } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
@@ -14,6 +13,11 @@ export default function Login() {
     const navigation = useNavigation();
 
     let ongName;
+    
+    async function limparStorageLogin(){
+        await AsyncStorage.removeItem('ongId');
+        await AsyncStorage.removeItem('ongName');
+    }
 
     async function handleLogin(){
 
@@ -56,6 +60,13 @@ export default function Login() {
             throw err;
         }
     }
+
+    useEffect(() => {
+        navigation.addListener('focus', () => {
+            limparStorageLogin();        
+        });
+
+    },[]);
 
     return(
         <View style={styles.container}>
