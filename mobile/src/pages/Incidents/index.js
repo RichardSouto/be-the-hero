@@ -38,7 +38,7 @@ export default function Incidents() {
     }
 
     useEffect(() => {
-        loadIncidents();
+        navigation.addListener('focus',loadIncidents)
     }, []);
 
     function navigateToDetail(incident) {
