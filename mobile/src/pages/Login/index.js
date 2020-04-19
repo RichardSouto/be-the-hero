@@ -26,7 +26,7 @@ export default function Login() {
         if (login.trim() == '') {
             Alert.alert(
                 'Be The Heroe',
-                'Deseja seguir informar o login?',
+                'Deseja seguir sem informar o login?',
                 [
                     {text: 'Sim', onPress: () => navigation.navigate('Incidents')},
                     {text: 'Não', onPress: () => { return }}

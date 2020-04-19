@@ -33,7 +33,7 @@ export default function CadastrarIncidente() {
                 }
             });
 
-            alert('Incidente cadastrado com sucesso!');
+            Alert.alert('Be The Hero','Incidente cadastrado com sucesso!');
             navigation.navigate('Incidents');
         }catch(err){
             alert(`Erro ao cadastrar o incidente. Tente novamente.\r\n\r\n${err.response.data.message}\r\n\r\nStatus Code:${err.response.data.statusCode}`);

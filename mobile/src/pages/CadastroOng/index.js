@@ -32,7 +32,7 @@ export default function CadastrarOng() {
         try{
             const response = await api.post('ongs', data);
 
-            alert(`Seu ID de acesso: ${response.data.id}`);
+            Alert.alert('Be The Hero',`Seu ID de acesso: ${response.data.id}`);
             navigation.navigate('Login');
         }catch(err){
             alert(`Erro no cadastro. Tente novamente.\r\n\r\n${err.response.data.message}\r\n\r\nStatus Code:${err.response.data.statusCode}`);
