@@ -8,7 +8,7 @@ import api from '../../../src/services/api';
 
 import styles from './styles';
 
-export default function Incidents(){
+export default function Incidents() {
     const [incidents, setIncidents] = useState([]);
     const [totalIncidents, setTotalIncidents] = useState(0);
     const [page, setPage] = useState(1);
@@ -17,11 +17,11 @@ export default function Incidents(){
     const navigation = useNavigation();
 
     async function loadIncidents() {
-        if(loading){
+        if (loading) {
             return;
         }
 
-        if(totalIncidents > 0 && incidents.length == totalIncidents){
+        if (totalIncidents > 0 && incidents.length == totalIncidents) {
             return;
         }
 
@@ -31,7 +31,7 @@ export default function Incidents(){
             params: { page }
         });
 
-        setIncidents([... incidents, ... response.data]);
+        setIncidents([...incidents, ...response.data]);
         setTotalIncidents(response.headers['x-total-count']);
         setPage(page + 1);
         setLoading(false);
@@ -39,10 +39,10 @@ export default function Incidents(){
 
     useEffect(() => {
         loadIncidents();
-    },[]);
+    }, []);
 
     function navigateToDetail(incident) {
-        navigation.navigate('Detail', { incident });    
+        navigation.navigate('Detail', { incident });
     }
 
     async function handleNovoIncidente() {
@@ -53,10 +53,10 @@ export default function Incidents(){
                 'Be The Heroe',
                 'Nenhuma ong logada no momento.\r\n\r\nDeseja realizar o login para cadastrar um novo incidente?',
                 [
-                    {text: 'Sim', onPress: () => navigation.navigate('Login')},
-                    {text: 'Não', onPress: () => { return }}
+                    { text: 'Sim', onPress: () => navigation.navigate('Login') },
+                    { text: 'Não', onPress: () => { return } }
                 ],
-                {onDismiss: () => { return } }
+                { onDismiss: () => { return } }
             )
             return;
         }
@@ -64,24 +64,27 @@ export default function Incidents(){
         navigation.navigate('CadastrarIncidente');
     }
 
-    return(
+    return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Image source={logoImg} />
                 <Text style={styles.headerText}>
                     Total de <Text style={styles.headerTextBold}>{totalIncidents} casos</Text>
                 </Text>
-            </View> 
+            </View>
 
             <Text style={styles.title}>Bem-vindo!</Text>
             <Text style={styles.description}>Escolha um dos casos abaixo e salve o dia</Text>
 
-            <Button 
-                color="#e02041"
-                title="Novo Incident" 
-                onPress={handleNovoIncidente}/>
+            <TouchableOpacity
+                style={styles.novoIncidenteTouchable}
+                onPress={handleNovoIncidente}
+            >
+                <Feather name="plus-circle" size={16} color="#E02041"></Feather>
+                <Text style={[styles.detailsButtonText,{marginLeft :5}]}>Adicionar Incidente</Text>
+            </TouchableOpacity>
 
-            <FlatList 
+            <FlatList
                 style={styles.incidentList}
                 data={incidents}
                 keyExtractor={incident => String(incident.id)}
@@ -90,12 +93,12 @@ export default function Incidents(){
                 onEndReachedThreshold={0.2}
                 renderItem={({ item: incident }) => (
                     <View style={styles.incident}>
-                        <Text style={styles.incidentProperty, { marginTop: 0}}>ONG:</Text>
+                        <Text style={styles.incidentProperty, { marginTop: 0 }}>ONG:</Text>
                         <Text style={styles.incidentValue}>{incident.name} de {incident.city}/{incident.uf}</Text>
-                        
+
                         <Text style={styles.incidentProperty}>CASO:</Text>
                         <Text style={styles.incidentValue}>{incident.title}</Text>
-                        
+
                         <Text style={styles.incidentProperty}>VALOR:</Text>
                         <Text style={styles.incidentValue}>
                             {Intl.NumberFormat('pt-BR', {
@@ -104,14 +107,14 @@ export default function Incidents(){
                             }).format(incident.value)}
                         </Text>
 
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             style={styles.detailsButton}
                             onPress={() => navigateToDetail(incident)}
                         >
                             <Text style={styles.detailsButtonText}>Ver mais detalhes</Text>
                             <Feather name="arrow-right" size={16} color="#E02041"></Feather>
                         </TouchableOpacity>
-                    
+
                     </View>
                 )}
             />

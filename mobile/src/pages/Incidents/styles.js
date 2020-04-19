@@ -34,11 +34,12 @@ export default StyleSheet.create({
     description: {
         fontSize: 16,
         lineHeight: 24,
-        color: '#737380'
+        color: '#737380',
+        marginBottom: 30
     },
 
     incidentList: {
-        marginTop: 32
+        marginTop: 5
     },
 
     incident: {
@@ -71,5 +72,12 @@ export default StyleSheet.create({
         color: '#e02041',
         fontSize: 15,
         fontWeight: 'bold'
+    },
+
+    novoIncidenteTouchable: {
+        flexDirection:'row', 
+        justifyContent:'flex-start', 
+        alignItems:'center', 
+        marginBottom: 10
     }
 });
