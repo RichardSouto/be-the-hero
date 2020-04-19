@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, TouchableOpacity, AsyncStorage, Alert } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { View, Text, Button, TouchableOpacity, AsyncStorage, Alert } from 'react-native' ;
+import { TextInput, RotationGestureHandler } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
 import api from '../../../src/services/api';
 
+import FolhasArrumadas from './FolhasRodape/folhasArrumadas';
+import NuvemsTopo from './NuvemsTopo/nuvemsTopo';
 
 export default function Login() {
     const [login, setLogin] = useState('');
@@ -70,6 +72,7 @@ export default function Login() {
 
     return(
         <View style={styles.container}>
+            <NuvemsTopo />
             <View style={styles.loginGroup}>
                 <Text style={styles.textLogin}>
                     Login
@@ -98,6 +101,7 @@ export default function Login() {
                     <Text style={styles.logarSemCadastroText}>Para logar sem cadastro, basta seguir sem preencher o campo de login.</Text>
                 </View>
             </View>
+            <FolhasArrumadas/>
         </View>
     );
 }
