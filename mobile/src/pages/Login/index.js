@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, TouchableOpacity, AsyncStorage, Alert } from 'react-native' ;
-import { TextInput, RotationGestureHandler } from 'react-native-gesture-handler';
+import { View, Text, Button, TouchableOpacity, AsyncStorage, Alert } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from './styles';
